@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Presure Monitor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta http-equiv="Access-Control-Allow-Method" content="*">
+    <link rel="stylesheet" href="./vender/font-awesome-3.2.1/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/flip-menu.plugin.css" />
+    <link rel="stylesheet" href="./css/cube-image-player.plugin.css" />
+</head>
+
+<body>
+    <main>
+        <ul class="main-left-menu">
+            <li><img src="./asset/images/head.jpg" /></li>
+            <li class="left-menu">
+            </li>
+            <li>
+                <div>
+                    <label>www.meddo.com.cn</label>
+                    <br />
+                    <label id="copyRight">&copy;&nbsp;2018&nbsp;
+                        <span z-lang="C006">上海迈动医疗器械股份有限公司 版权所有</span>
+                    </label>
+                </div>
+            </li>
+        </ul>
+        <div class="main-content">
+            <div class="main-header"></div>
+            <div class="main-body"></div>
+        </div>
+        <div class="layout-cover"></div>
+        <audio id="main-audio-alert" src="./asset/audio/alert.ogg" loop="loop"></audio>
+    </main>
+    <!--venders-->
+    <script type="text/javascript" src="./vender/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/prototype.js"></script>
+    <script type="text/javascript" src="./vender/heatmap.min.js"></script>
+    <script type="text/javascript" src="./vender/three.min.js"></script>
+    <!--wrappers-->
+    <script type="text/javascript" src="./js/classes/pageCoordinator.class.js"></script>
+    <script type="text/javascript" src="./js/classes/common/functions.class.js"></script>
+    <script type="text/javascript" src="./js/classes/common/logic.class.js"></script>
+    <script type="text/javascript" src="./js/classes/common/interface.class.js"></script>
+    <script type="text/javascript" src="./js/classes/common/io.class.js"></script>
+    <script type="text/javascript" src="./js/classes/common/runtimeCollection.class.js"></script>
+    <script type="text/javascript" src="./js/classes/common/sharingDataSet.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/layoutCover.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/nwController.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/matrixKeeper.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/page/navMenu.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/page/contentHeader.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/page/contentBody.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/page/heatmapInfo.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/features/heatmap/heatmapAgent.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/features/heatmap/heatmapWrapper.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/features/countdown/countDownAgent.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/features/countdown/countdown.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/features/edge/edgeAgent.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/features/skeleton/skeletonAgent.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/features/levelnote/levelnoteAgent.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/features/behavior/behaviorAgent.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/features/gait/gaitAgent.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/features/gait/algorithmsLogic.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/features/keeprecord/keepRecordAgent.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/features/scale/scaleAgent.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/features/history/historyAgent.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/features/config/configAgent.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/features/fallbed/fallbedAgent.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/features/three/threeAgent.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/features/three/threeWrapper.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/features/alarmController.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/serialport/callback.class.js"></script>
+    <script type="text/javascript" src="./js/classes/wrapper/serialport/serialport.class.js"></script>
+    <!--plugins-->
+    <script type="text/javascript" src="./js/plugin/flipMenu.plugin.js"></script>
+    <script type="text/javascript" src="./js/plugin/cubeImagePlayer.plugin.js"></script>
+    <!--main-->
+    <script type="text/javascript" src="./js/main.js"></script>
+</body>
+
+</html>

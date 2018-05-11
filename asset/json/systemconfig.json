@@ -1,0 +1,90 @@
+{
+    "A1":
+    {
+        "title":
+        {
+            "zh-cn": "智能压力坐垫",
+            "en-us": "Intelligent pressure Cushion"
+        },
+        "size":
+        {
+            "x": 16,
+            "y": 16
+        },
+        "radiusCoefficient": 1.5,
+        "features": ["M001", "W001", "W002", "M002", "W005"],
+        "range":
+        {
+            "minX": 0,
+            "maxX": 16,
+            "minY": 0,
+            "maxY": 16
+        }
+    },
+    "A2":
+    {
+        "title":
+        {
+            "zh-cn": "智能压力床垫",
+            "en-us": "Intelligent Pressure Mattress"
+        },
+        "size":
+        {
+            "x": 32,
+            "y": 80
+        },
+        "radiusCoefficient": 2.6,
+        "features": ["M001", "W001", "W002", "M002", "W005", "W006", "C001"],
+        "range":
+        {
+            "minX": 0,
+            "maxX": 32,
+            "minY": 0,
+            "maxY": 80
+        }
+    },
+    "A3":
+    {
+        "title":
+        {
+            "zh-cn": "步态监测垫",
+            "en-us": "Gait Monitoring Pads"
+        },
+        "size":
+        {
+            "x": 32,
+            "y": 80
+        },
+        "radiusCoefficient": 1.9,
+        "features": ["M001", "W003", "C001"],
+        "range":
+        {
+            "minX": 0,
+            "maxX": 32,
+            "minY": 0,
+            "maxY": 80
+        }
+    },
+    "A4":
+    {
+        "title":
+        {
+            "zh-cn": "手术褥疮监测垫",
+            "en-us": "Surgical Bedsore Monitoring Pads"
+        },
+        "size":
+        {
+            "x": 32,
+            "y": 80
+        },
+        "radiusCoefficient": 2.8,
+        "features": ["M001", "W001", "M002", "W004", "W005", "C001"],
+        "range":
+        {
+            "minX": 0,
+            "maxX": 32,
+            "minY": 0,
+            "maxY": 80
+        }
+    }
+}
