@@ -1,0 +1,12 @@
+{
+    "lang": "zh-cn",
+    "lowerLimit": 0,
+    "countDownType": 1,
+    "levelHighNote": 1,
+    "levelHighLimit": 0.3,
+    "interfaceType": 0,
+    "keepRecord": true,
+    "relaxLimit": 40,
+    "relaxCheckTimes": 20,
+    "defaultScale": 0
+}

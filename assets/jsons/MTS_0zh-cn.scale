@@ -1,0 +1,130 @@
+{
+    "title": "布兰登风险评估表",
+    "presureRange": 4,
+    "descriptionItem": [
+    {
+        "title": "感知能力",
+        "items": [
+        {
+            "description": "完全受限",
+            "value": "1"
+        },
+        {
+            "description": "大部分受限",
+            "value": "2"
+        },
+        {
+            "description": "轻度受限",
+            "value": "3"
+        },
+        {
+            "description": "无损害",
+            "value": "4"
+        }]
+    },
+    {
+        "title": "潮湿程度",
+        "items": [
+        {
+            "description": "持续潮湿",
+            "value": "1"
+        },
+        {
+            "description": "常常潮湿",
+            "value": "2"
+        },
+        {
+            "description": "偶尔潮湿",
+            "value": "3"
+        },
+        {
+            "description": "罕见潮湿",
+            "value": "4"
+        }]
+    },
+    {
+        "title": "活动能力",
+        "items": [
+        {
+            "description": "卧床",
+            "value": "1"
+        },
+        {
+            "description": "坐椅子",
+            "value": "2"
+        },
+        {
+            "description": "偶尔步行",
+            "value": "3"
+        },
+        {
+            "description": "经常步行",
+            "value": "4"
+        }]
+    },
+    {
+        "title": "移动能力",
+        "items": [
+        {
+            "description": "完全受限",
+            "value": "1"
+        },
+        {
+            "description": "非常受限",
+            "value": "2"
+        },
+        {
+            "description": "轻微受限",
+            "value": "3"
+        },
+        {
+            "description": "不受限",
+            "value": "4"
+        }]
+    },
+    {
+        "title": "营养摄取能力",
+        "items": [
+        {
+            "description": "非常差",
+            "value": "1"
+        },
+        {
+            "description": "可能不足",
+            "value": "2"
+        },
+        {
+            "description": "充足",
+            "value": "3"
+        },
+        {
+            "description": "丰富",
+            "value": "4"
+        }]
+    }],
+    "threshold": [
+    {
+        "min": 6,
+        "max": 12,
+        "description": "高危",
+        "rangeTime": 30
+    },
+    {
+        "min": 13,
+        "max": 14,
+        "description": "中危",
+        "rangeTime": 60
+    },
+    {
+        "min": 15,
+        "max": 18,
+        "description": "低危",
+        "rangeTime": 120
+    },
+    {
+        "min": 19,
+        "max": 99,
+        "description": "无危",
+        "rangeTime": 180
+    }]
+}

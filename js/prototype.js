@@ -9,16 +9,13 @@ Date.prototype.Format = function(fmt) {
         "q+": Math.floor((this.getMonth() + 3) / 3),
         "S": this.getMilliseconds()
     };
-    if (/(y+)/.test(fmt))
-        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
     for (var k in o)
-        if (new RegExp("(" + k + ")").test(fmt))
-            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
 };
 Date.prototype.getDiff = function(oldTimeStamp, hasDays) {
     var timeStampDiff = Math.abs(this.getTime() - oldTimeStamp);
-
     var days = hasDays ? Math.floor(timeStampDiff / (24 * 3600 * 1000)) : 0;
     var leave1 = hasDays ? (timeStampDiff % (24 * 3600 * 1000)) : timeStampDiff;
     var hours = Math.floor(leave1 / (3600 * 1000));
@@ -26,7 +23,6 @@ Date.prototype.getDiff = function(oldTimeStamp, hasDays) {
     var minutes = Math.floor(leave2 / (60 * 1000));
     var leave3 = leave2 % (60 * 1000);
     var seconds = Math.round(leave3 / 1000);
-
     var result = {};
     switch (true) {
         case (days > 0):
@@ -56,3 +52,24 @@ Array.prototype.clone = function() {
     var innerStr = JSON.stringify(this);
     return JSON.parse(innerStr);
 };
+String.prototype.format = function(args) {
+    var result = this;
+    if (arguments.length > 0) {
+        if (arguments.length == 1 && typeof(args) == "object") {
+            for (var key in args) {
+                if (args[key] != undefined) {
+                    var reg = new RegExp("({" + key + "})", "g");
+                    result = result.replace(reg, args[key]);
+                }
+            }
+        } else {
+            for (var i = 0; i < arguments.length; i++) {
+                if (arguments[i] != undefined) {
+                    var reg = new RegExp("({)" + i + "(})", "g");
+                    result = result.replace(reg, arguments[i]);
+                }
+            }
+        }
+    }
+    return result;
+}

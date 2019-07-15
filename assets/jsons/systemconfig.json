@@ -1,0 +1,199 @@
+{
+    "DEVICE_SET": "nwSerialPort",
+    "A0": {
+        "title": {
+            "zh-cn": "配置模板",
+            "en-us": "Configuration"
+        },
+        "size": {
+            "x": 1,
+            "y": 1
+        },
+        "physicalSize": {
+            "x": 1,
+            "y": 1
+        },
+        "gaitFlg": false,
+        "radiusCoefficient": 1,
+        "features": ["C001", "M001", "M002", "M003", "W001", "W002", "W003", "W004", "W005", "W006", "W007", "W008", "W009", "W010", "W011", "W012", "W013", "W014", "W015", "W016", "P001", "P002", "P003", "P004"],
+        "range": {
+            "minX": 0,
+            "maxX": 1,
+            "minY": 0,
+            "maxY": 1
+        },
+        "stableSamplingLimit": 4,
+        "baseVariance": 5,
+        "autoCalibration": false,
+        "lowLimit": 0,
+        "maxLimit": 100,
+        "noiseFilter": 10,
+        "viewMatrixFormula": "{0}",
+        "viewWeightFormula": "{0} / 9.80665",
+        "testWait": [50, 30],
+        "splitTimes": 1,
+        "gradient": {
+            "0.01": "rgb(255,255,251)",
+            "0.02": "rgb(242,255,239)",
+            "0.03": "rgb(229,255,224)",
+            "0.17": "rgb(216,255,208)",
+            "0.25": "rgb(234,254,157)",
+            "0.36": "rgb(254,255,146)",
+            "0.52": "rgb(252,146,2)",
+            "0.68": "rgb(249,97,0)",
+            "0.75": "rgb(255,0,13)"
+        },
+        "opacity": [0.1, 1],
+        "bodypartProportion": {
+            "head": "1/8",
+            "shoulder": "1.5/8",
+            "loins": "1/8",
+            "gluteus": "1.2/8",
+            "leg": "3.3/8"
+        },
+        "deformed": 32
+    },
+    "A1": {
+        "title": {
+            "zh-cn": "智能压力坐垫",
+            "en-us": "Pressure Cushion"
+        },
+        "size": {
+            "x": 16,
+            "y": 16
+        },
+        "physicalSize": {
+            "x": 16,
+            "y": 16
+        },
+        "gaitFlg": false,
+        "radiusCoefficient": 1.5,
+        "features": ["M001", "W001", "W002", "M002", "W005"],
+        "range": {
+            "minX": 0,
+            "maxX": 16,
+            "minY": 0,
+            "maxY": 16
+        },
+        "stableSamplingLimit": 4,
+        "baseVariance": 300,
+        "autoCalibration": true,
+        "lowLimit": 0,
+        "maxLimit": 4096,
+        "noiseFilter": 0,
+        "viewMatrixFormula": "{0}",
+        "splitTimes": 1
+    },
+    "A2": {
+        "title": {
+            "zh-cn": "智能压力床垫",
+            "en-us": "Pressure Mattress"
+        },
+        "size": {
+            "x": 32,
+            "y": 80
+        },
+        "physicalSize": {
+            "x": 32,
+            "y": 80
+        },
+        "gaitFlg": false,
+        "radiusCoefficient": 1.5,
+        "features": ["M001", "W001", "W002", "M002", "W005", "W006", "C001"],
+        "range": {
+            "minX": 0,
+            "maxX": 32,
+            "minY": 0,
+            "maxY": 80
+        },
+        "stableSamplingLimit": 4,
+        "baseVariance": 1500,
+        "autoCalibration": true,
+        "lowLimit": 0,
+        "maxLimit": 4096,
+        "noiseFilter": 0,
+        "viewMatrixFormula": "{0}",
+        "splitTimes": 1
+    },
+    "A3": {
+        "title": {
+            "zh-cn": "步态监测垫",
+            "en-us": "Gait Pads"
+        },
+        "size": {
+            "x": 32,
+            "y": 80
+        },
+        "physicalSize": {
+            "x": 32,
+            "y": 80
+        },
+        "gaitFlg": true,
+        "radiusCoefficient": 1.5,
+        "features": ["M001", "W003", "C001"],
+        "range": {
+            "minX": 0,
+            "maxX": 32,
+            "minY": 0,
+            "maxY": 80
+        },
+        "stableSamplingLimit": 4,
+        "baseVariance": 800,
+        "autoCalibration": true,
+        "lowLimit": 0,
+        "maxLimit": 4096,
+        "noiseFilter": 0,
+        "viewMatrixFormula": "{0}",
+        "splitTimes": 1
+    },
+    "A4": {
+        "title": {
+            "zh-cn": "手术褥疮监测垫",
+            "en-us": "Surgical Pads"
+        },
+        "size": {
+            "x": 32,
+            "y": 80
+        },
+        "physicalSize": {
+            "x": 32,
+            "y": 80
+        },
+        "gaitFlg": false,
+        "radiusCoefficient": 1.5,
+        "features": ["M001", "W001", "M002", "W004", "W005", "C001"],
+        "range": {
+            "minX": 0,
+            "maxX": 32,
+            "minY": 0,
+            "maxY": 80
+        },
+        "stableSamplingLimit": 4,
+        "baseVariance": 1500,
+        "autoCalibration": true,
+        "lowLimit": 0,
+        "maxLimit": 4096,
+        "noiseFilter": 0,
+        "viewMatrixFormula": "{0}",
+        "splitTimes": 1,
+        "gradient": {
+            "0.01": "rgb(255,255,251)",
+            "0.02": "rgb(242,255,239)",
+            "0.03": "rgb(229,255,224)",
+            "0.17": "rgb(216,255,208)",
+            "0.25": "rgb(234,254,157)",
+            "0.36": "rgb(254,255,146)",
+            "0.52": "rgb(252,146,2)",
+            "0.68": "rgb(249,97,0)",
+            "0.75": "rgb(255,0,13)"
+        },
+        "opacity": 1,
+        "bodypartProportion": {
+            "head": "1/8",
+            "shoulder": "1.5/8",
+            "loins": "1/8",
+            "gluteus": "1.2/8",
+            "leg": "3.3/8"
+        }
+    }
+}

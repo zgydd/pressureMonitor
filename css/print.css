@@ -1,0 +1,22 @@
+@page {
+    size: landscape;
+    margin: 0mm;
+}
+.prn-disabled {
+    display: none;
+}
+.playground-container .gait-report-container.screen-container.prn-show-all {
+    max-height: none !important;
+}
+.playground-container.actived-container {
+    overflow-y: auto !important;
+    height: auto !important;
+}
+.playground-container.actived-container label.prn-note {
+    font-size: 1.8em;
+    font-weight: bolder;
+    display: block;
+    text-align: center;
+    line-height: 3em;
+    margin-top: 2em;
+}

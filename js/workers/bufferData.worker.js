@@ -1,244 +1,60 @@
 'use strict';
-var maxSize = {
-    x: 0,
-    y: 0,
-    map: {}
+var _paddingMark = function(value, mark, length, paddingLeft) {
+    var paddingLength = length - value.toString().length;
+    var markContext = '';
+    for (var i = 0; i < paddingLength; i++) markContext += mark;
+    if (paddingLeft) return (markContext + value.toString());
+    else return (value.toString() + markContext);
 };
-var splitPoint = null;
-var innerData = null;
-var callbackFlg = false;
-
-var combineNumData = function(chars) {
-    var result = 0;
-    for (var i = 0; i < chars.length; i++) {
-        result += parseInt(String.fromCharCode(chars[i])) * Math.pow(10, (chars.length - (i + 1)));
-    }
-    return result;
+var _serialization = function(sourceData) {
+    if (typeof sourceData !== 'number') sourceData = parseInt(sourceData);
+    var src = _paddingMark(sourceData.toString(2), '0', 8, true);
+    return [src.substring(0, 4), src.substring(4, 8)];
 };
+var _formatABufferData = function(recordBuffer, refResult) {
+    if (recordBuffer.length < 10) return;
+    refResult.origin.push(recordBuffer[0] * 256 + recordBuffer[1]);
+    refResult.heart.push(recordBuffer[2] * 256 + recordBuffer[3]);
+    refResult.breath.push(recordBuffer[4] * 256 + recordBuffer[5]);
+    if (recordBuffer[6] < 255) refResult.rHeart = recordBuffer[6];
+    if (recordBuffer[7] < 255) refResult.rBreath = recordBuffer[7];
 
-var _formatABufferData = function(startIdx, endIdx, bufferData) {
-    if (endIdx - startIdx < 5) return;
-    var oneRecord = bufferData.slice(startIdx, endIdx + 1);
-    var cursorFlg = 0;
-    var tmpRecord = [];
-    var x, y, numData;
-    for (var i = 0; i < oneRecord.length; i++) {
-        if (oneRecord[i] === 32) {
-            if (tmpRecord.length < 1) continue;
-            switch (cursorFlg) {
-                case 0:
-                    x = combineNumData(tmpRecord);
-                    break;
-                case 1:
-                    y = combineNumData(tmpRecord);
-                    break;
-                default:
-                    break;
-            }
-            tmpRecord.length = 0;
-            cursorFlg++;
-            continue;
-        }
-        if (oneRecord[i] === 65) {
-            numData = combineNumData(tmpRecord);
-            break;
-        }
-        tmpRecord.push(oneRecord[i]);
-    }
-    if (x === undefined || y === undefined || numData === undefined ||
-        isNaN(x) || isNaN(y) || isNaN(numData)) return;
+    var motionGrp = _serialization(recordBuffer[8]);
+    refResult.motion = motionGrp[1];
+    refResult.pdType = motionGrp[0];
 
-    if (x + 1 > maxSize.x) maxSize.x = x + 1;
-    if (y + 1 > maxSize.y) maxSize.y = y + 1;
-    if (innerData && (x >= innerData.length || y >= innerData[0].length)) return;
-
-    if (!innerData) {
-        maxSize.map[x + '-' + y] = numData;
-    } else if (innerData[x][y] != numData) {
-        innerData[x][y] = numData;
-    }
-
-    if (!splitPoint) splitPoint = {
-        x: x,
-        y: y
-    }
-    else if (splitPoint.x === x && splitPoint.y === y) {
-        if (!innerData) {
-            innerData = [];
-            for (var i = 0; i < maxSize.x; i++) {
-                var inLine = [];
-                for (var j = 0; j < maxSize.y; j++) {
-                    inLine.push(-1);
-                }
-                innerData.push(inLine);
-            }
-            for (var ele in maxSize.map) {
-                var tmpArr = ele.split('-');
-                if (tmpArr.length !== 2) continue;
-                if (tmpArr[0] < 0 || tmpArr[1] < 0 ||
-                    tmpArr[0] >= maxSize.x || tmpArr[1] >= maxSize.y)
-                    continue;
-                innerData[tmpArr[0]][tmpArr[1]] = maxSize.map[ele];
-            }
-        }
-        callbackFlg = true;
-    }
+    var statusGrp = _serialization(recordBuffer[9]);
+    refResult.status = statusGrp[1];
+    refResult.sitStatus = statusGrp[0];
 };
 
 onmessage = function(event) {
     var message = JSON.parse(event.data);
-    if (!innerData && message.innerData) innerData = message.innerData;
-    var startPos = 0;
-    var buffer = message.data.data;
-    for (startPos = 0; startPos < buffer.length; startPos++) {
-        if (buffer[startPos] === 65) break;
-    }
-    if (startPos >= buffer.length) return;
-    var startIdx = startPos + 1;
-    for (var i = startPos + 1; i < buffer.length; i++) {
+    var buffer = message.data;
 
-        if (buffer[i] === 65) {
-            _formatABufferData(startIdx, i, buffer);
-            startIdx = i + 1;
+    var result = {
+        origin: [],
+        heart: [],
+        breath: [],
+        rHeart: '--',
+        rBreath: '--',
+        motion: '0001',
+        status: '0000',
+        pdType: '0001',
+        sitStatus: '0000'
+    };
+
+    while (buffer.length > 2) {
+        var cursor = 0;
+        for (cursor = 0; cursor < buffer.length - 1; cursor++) {
+            if (buffer[cursor] === 253 && buffer[cursor + 1] === 223) break;
         }
+        if (cursor >= buffer.length - 1) break;
+        buffer.splice(0, cursor + 2);
+        //var recordLength = buffer[0];
+        var record = buffer.splice(0, 10);
+        //if (record.length < recordLength - 3) break;
+        _formatABufferData(record, result);
     }
-
-    if (callbackFlg) {
-        if (innerData.length && innerData[0].length) {
-            for (var i = 0; i < innerData[0].length; i++) {
-                var thisLineSum = 0;
-                for (var j = 0; j < innerData.length; j++) {
-                    if (innerData[j][i] >= 800) thisLineSum += innerData[j][i];
-                }
-                thisLineSum = thisLineSum * 0.07;
-                for (var j = 0; j < innerData.length; j++) {
-                    if (innerData[j][i] <= thisLineSum) innerData[j][i] = 0;
-                }
-            }
-        }
-        var result = {
-            size: {
-                x: maxSize.x,
-                y: maxSize.y
-            },
-            data: innerData
-        };
-        if (innerData && innerData.length && innerData[0].length &&
-            innerData.length !== maxSize.x || innerData[0].length !== maxSize.y)
-            innerData = result.data = null;
-        postMessage(JSON.stringify(result));
-        splitPoint = null;
-        callbackFlg = false;
-    }
+    postMessage(JSON.stringify(result));
 };
-/*** old version
-var maxSize = {
-	x: 0,
-	y: 0,
-	map: {}
-};
-var splitPoint = null;
-var innerData = null;
-var callbackFlg = false;
-
-var _hex2char = function(data) {
-	var a = data.toString().trim();
-	switch (a.length) {
-		case 1:
-			a = '%u000' + a;
-			break;
-		case 2:
-			a = '%u00' + a;
-			break;
-		case 3:
-			a = '%u0' + a;
-			break;
-		case 4:
-			a = '%u' + a;
-			break;
-		default:
-			break;
-	}
-	return unescape(a);
-};
-var _formatABufferData = function(startIdx, endIdx, bufferData) {
-	if (endIdx - startIdx !== 5) return;
-	var x = parseInt(bufferData[startIdx]);
-	var y = parseInt(bufferData[startIdx + 1]);
-	if (x + 1 > maxSize.x) maxSize.x = x + 1;
-	if (y + 1 > maxSize.y) maxSize.y = y + 1;
-	if (innerData && (x >= innerData.length || y >= innerData[0].length)) return;
-
-	var recordData = [];
-	for (var i = startIdx + 2; i < endIdx; i++) {
-		recordData.push(_hex2char(bufferData[i].toString(16)));
-	}
-	var numData = parseInt(new String(recordData[0] + recordData[1] + recordData[2]), 16);
-	if (!innerData) {
-		maxSize.map[x + '-' + y] = numData;
-	} else if (innerData[x][y] != numData) {
-		innerData[x][y] = numData;
-	}
-
-	if (!splitPoint) splitPoint = {
-		x: x,
-		y: y
-	}
-	else if (splitPoint.x === x && splitPoint.y === y) {
-		if (!innerData) {
-			innerData = [];
-			for (var i = 0; i < maxSize.x; i++) {
-				var inLine = [];
-				for (var j = 0; j < maxSize.y; j++) {
-					inLine.push(-1);
-				}
-				innerData.push(inLine);
-			}
-			for (var ele in maxSize.map) {
-				var tmpArr = ele.split('-');
-				if (tmpArr.length !== 2) continue;
-				if (tmpArr[0] < 0 || tmpArr[1] < 0 ||
-					tmpArr[0] >= maxSize.x || tmpArr[1] >= maxSize.y)
-					continue;
-				innerData[tmpArr[0]][tmpArr[1]] = maxSize.map[ele];
-			}
-		}
-		callbackFlg = true;
-	}
-};
-
-onmessage = function(event) {
-	var message = JSON.parse(event.data);
-	if (!innerData && message.innerData) innerData = message.innerData;
-	var startPos = 0;
-	var buffer = message.data.data;
-	for (startPos = 0; startPos < buffer.length; startPos++) {
-		if (buffer[startPos] === 255) break;
-	}
-	if (startPos >= buffer.length) return;
-	var startIdx = startPos + 1;
-	for (var i = startPos + 1; i < buffer.length; i++) {
-
-		if (buffer[i] === 255) {
-			_formatABufferData(startIdx, i, buffer);
-			startIdx = i + 1;
-		}
-	}
-
-	if (callbackFlg) {
-		var result = {
-			size: {
-				x: maxSize.x,
-				y: maxSize.y
-			},
-			data: innerData
-		};
-		if (innerData && innerData.length && innerData[0].length &&
-			innerData.length !== maxSize.x || innerData[0].length !== maxSize.y)
-			innerData = result.data = null;
-		postMessage(JSON.stringify(result));
-		splitPoint = null;
-		callbackFlg = false;
-	}
-};
-*/

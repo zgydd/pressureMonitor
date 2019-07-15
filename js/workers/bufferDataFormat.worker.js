@@ -49,8 +49,9 @@ var _formatABufferData = function(record) {
 onmessage = function(event) {
     var message = JSON.parse(event.data);
     if (!innerData && message.innerData) innerData = message.innerData;
+    var id = message.id;
     var buffer = message.data.data;
-    if (!buffer || !buffer.length) return;
+    if (!id || !buffer || !buffer.length) return;
     tmpBuffer = tmpBuffer.concat(buffer);
 
     if (buffer.indexOf(69) >= 0) {
@@ -120,8 +121,9 @@ onmessage = function(event) {
             }
             oneRecord.push(arrData[idx]);
         }
-        lineFilter();
+        //lineFilter();
         var result = {
+            id: id,
             type: productType,
             size: size,
             data: innerData
