@@ -1,0 +1,42 @@
+.home-main {
+    margin: 6em auto;
+    text-align: center;
+}
+
+.home-main img {
+    width: 27%;
+    margin-top: 3em;
+}
+
+ul {
+    line-height: 1.8em;
+    list-style: none;
+}
+
+p {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.guide-main li {
+    padding: 0.5em;
+}
+
+.guide-main img,
+.guide-main video {
+    max-width: 80%;
+}
+
+.guide-main video {
+    height: 600px;
+}
+
+.algorth-main li.node-only {
+    color: rgba(188, 0, 0, 0.8);
+}
+
+.algorth-main li span.note {
+    display: inline-block;
+    color: rgba(200, 0, 0, 0.8);
+    width: 1.25em;
+}
